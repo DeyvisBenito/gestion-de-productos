@@ -1,16 +1,37 @@
 import { Request, Response } from "express";
 import { ProductModel } from '../models/modelsSequalize/product.model'
 import { Product } from "../models/interfaces/product.interface";
+import { OptionPagination } from "../models/interfaces/optionsPagination.interface";
+import { ProductPaginated } from "../models/interfaces/productPaginated.interface";
 
-
-// Get all products
+// Get all products and paginated
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
     try {
-        const productsBD = await ProductModel.findAll();
+        const { page, size } = req.query;
 
-        const products: Product[] = productsBD.map(product => product.toJSON() as Product);
+        if (!page || !size) {
+            const productsBD = await ProductModel.findAll();
 
-        res.status(200).json(products)
+            const products: Product[] = productsBD.map(product => product.toJSON() as Product);
+
+            res.status(200).json(products);
+            return;
+        }
+
+        const options: OptionPagination = {
+            limit: Number(size),
+            offset: (Number(page) - 1) * Number(size)
+        }
+
+        const { count, rows } = await ProductModel.findAndCountAll(options);
+
+        const productsPaginated: ProductPaginated = {
+            Products: rows.map(product => product.toJSON() as Product),
+            Total: count
+        }
+
+        res.status(200).json(productsPaginated)
+
 
     } catch (error) {
         if (error instanceof Error) {
