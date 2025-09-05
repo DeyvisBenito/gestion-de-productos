@@ -110,6 +110,11 @@ La gestión de productos cuenta con una ventana principal que lista los producto
 
 # Pasos para ejecutar los proyectos
 
+## <u>Creación de la Base de Datos en MySql</u>
+
+Abra el archivo **DBScript.sql** en un editor de su sistema de gestión de bases de datos, como **MySQL Workbench**, y ejecute el script. Esto creará la base de datos **pruebatecnica** con dos tablas: **products** y **users**, que serán utilizadas para almacenar los datos de la aplicación.
+
+
 ## <u>Dependencias del entorno de desarrollo </u>
 
 Para una mejor ejecución de los proyectos es recomendable contar con el siguiente versionamiento:
