@@ -106,4 +106,4 @@ Y su Frontend debería funcionar correctamente.
 
 ---
 
-Y listo, sus proyectos deberían ejecutarse y trabajar en conjunto correctamente.
+Y listo, su proyecto debería ejecutarse y trabajar correctamente.
