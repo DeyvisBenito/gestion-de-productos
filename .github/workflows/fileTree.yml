@@ -1,0 +1,19 @@
+name: Mostrar tree de los archivos
+
+on: 
+  workflow_dispatch: # ejecución manual
+
+jobs:
+  listar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar tree
+        run: sudo apt-get update && sudo apt-get install -y tree
+
+      - name: Listar los archivos del repositorio
+        run: |
+          echo "El repositorio ${{ github.repository }} contiene los siguientes archivos"
+          tree
