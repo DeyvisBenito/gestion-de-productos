@@ -14,10 +14,10 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
             return;
         }
     }
@@ -50,10 +50,10 @@ export const getProduct = async (req: Request, res: Response): Promise<void> => 
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
             return;
         }
     }
@@ -88,10 +88,10 @@ export const postProduct = async (req: Request, res: Response): Promise<void> =>
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
             return;
         }
     }
@@ -148,10 +148,10 @@ export const putProduct = async (req: Request, res: Response): Promise<void> => 
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
             return;
         }
     }
@@ -185,10 +185,10 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
             return;
         }
     }

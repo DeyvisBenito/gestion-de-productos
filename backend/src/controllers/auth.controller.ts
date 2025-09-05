@@ -11,13 +11,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         const { email, password } = req.body as { email?: string; password?: string };
 
         if (!email || email === null || !password || password === null) {
-            res.status(400).json({ message: `Email y password son requeridos` });
+            res.status(400).json({ error: `Correo electronico y Password son requeridos` });
             return;
         }
 
         const userExist = await searchUser(email);
         if (userExist) {
-            res.status(400).json({ message: 'El usuario ya existe' })
+            res.status(400).json({ error: 'El Correo electronico ya existe' })
             return;
         }
 
@@ -36,10 +36,10 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
             return;
         }
     }
@@ -51,33 +51,48 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         const { email, password } = req.body as { email: string, password: string };
 
         if (!email || email === null || !password || password == null) {
-            res.status(400).json({ message: "Email y password son requeridos" });
+            res.status(400).json({ error: "Email y password son requeridos" });
             return;
         }
 
         const user = await searchUser(email);
         if (!user) {
-            res.status(400).json({ message: 'Usuario y contraseña no coinciden' });
+            res.status(400).json({ error: 'Correo electrónico y contraseña no coinciden' });
             return;
         }
 
         const authorize = await comparePasswords(password, user.Password);
         if (!authorize) {
-            res.status(400).json({ message: 'Usuario y contraseña no coinciden' });
+            res.status(400).json({ error: 'Correo electrónico y contraseña no coinciden' });
             return;
         }
 
         const token = generarToken(user);
 
-        res.status(200).json({token});
+        res.status(200).json({ token });
 
 
     } catch (error) {
         if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
             return;
         } else {
-            res.status(500).json({ message: String(error) });
+            res.status(500).json({ error: String(error) });
+            return;
+        }
+    }
+}
+
+export const authenticateTokens = async (req: Request, res: Response): Promise<void> => {
+    try {
+        res.status(200).json({message: 'Token valido'});
+
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
+            return;
+        } else {
+            res.status(500).json({ error: String(error) });
             return;
         }
     }
